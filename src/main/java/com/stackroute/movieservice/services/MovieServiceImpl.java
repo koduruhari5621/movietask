@@ -2,8 +2,10 @@ package com.stackroute.movieservice.services;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.stackroute.movieservice.domain.Movie;
 import com.stackroute.movieservice.exceptions.MovieAlreadyExistsException;
 import com.stackroute.movieservice.exceptions.MovieNotFoundException;
@@ -12,7 +14,11 @@ import com.stackroute.movieservice.repository.MovieRepository;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-	MovieRepository movierepo;
+	 MovieRepository movierepo;
+
+//	public MovieServiceImpl() {
+//
+//	}
 
 	@Autowired
 	public MovieServiceImpl(MovieRepository movierepo) {
@@ -31,7 +37,7 @@ public class MovieServiceImpl implements MovieService {
 		} else {
 			throw new MovieAlreadyExistsException("Movie already exits ");
 		}
-		
+
 	}
 
 	// ---------------------getall-------------------------
@@ -46,7 +52,7 @@ public class MovieServiceImpl implements MovieService {
 
 	// ------------------------------------------delete------------------------
 	@Override
-	public List<Movie> deleteMovie(Movie movie) throws MovieNotFoundException  {
+	public List<Movie> deleteMovie(Movie movie) throws MovieNotFoundException {
 		int local = movie.getMovieId();
 		List<Movie> listobj;
 		if (movierepo.existsById(local) == true) {
@@ -73,15 +79,13 @@ public class MovieServiceImpl implements MovieService {
 		}
 	}
 
-//	@Override
-//	public List<Movie> getByMovieAlpha(String searchTerm) {
-//		List<Movie> alphalist = movierepo.getByMovieAlpha(searchTerm);
-//		return alphalist;
-//	}
-	
-	//----------------get-byId-----------------------------------------
-	
-	
+	// @Override
+	// public List<Movie> getByMovieAlpha(String searchTerm) {
+	// List<Movie> alphalist = movierepo.getByMovieAlpha(searchTerm);
+	// return alphalist;
+	// }
+
+	// ----------------get-byId-----------------------------------------
 
 }
 // ------------junk---------------------------

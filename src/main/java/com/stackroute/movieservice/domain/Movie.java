@@ -1,35 +1,25 @@
 package com.stackroute.movieservice.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-//import lombok.AllArgsConstructor;
-//import lombok.Builder;
-//import lombok.Data;
-//import lombok.NoArgsConstructor;
 
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity 
-//@Document
-//@Data
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Builder
+
+ 
+@Document
+
 public class Movie {
 	@Id
-	private int movieId;	
+	private int movieId;
 	private String movieName;
 	private String movieDesc;
 	private int movieYear;
-	
-	
-	
+
 	public Movie() {
-		
+
 	}
-	
-	//constructer
+
 	public Movie(int movieId, String movieName, String movieDesc, int movieYear) {
 		super();
 		this.movieId = movieId;
@@ -37,31 +27,38 @@ public class Movie {
 		this.movieDesc = movieDesc;
 		this.movieYear = movieYear;
 	}
-	//movie id
+
+	// movie id
 	public int getMovieId() {
 		return movieId;
 	}
+
 	public void setMovieId(int movieId) {
 		this.movieId = movieId;
 	}
-	//movie name
+
+	// movie name
 	public String getMovieName() {
 		return movieName;
 	}
+
 	public void setMovieName(String movieName) {
 		this.movieName = movieName;
 	}
-	//movie desc
+
+	// movie desc
 	public String getMovieDesc() {
 		return movieDesc;
 	}
-	
+
 	public void setMovieDesc(String movieDesc) {
 		this.movieDesc = movieDesc;
 	}
+
 	public int getMovieYear() {
 		return movieYear;
 	}
+
 	public void setMovieYear(int movieYear) {
 		this.movieYear = movieYear;
 	}
