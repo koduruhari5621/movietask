@@ -2,6 +2,8 @@ package com.stackroute.movieservice.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,7 @@ import com.stackroute.movieservice.services.MovieService;
 public class MovieController {
 
 	 MovieService movieservice;
+		Logger logger = LoggerFactory.getLogger("BootStrapData");
 
 //	public MovieController() {
 //		// TODO Auto-generated constructor stub
@@ -47,6 +50,10 @@ public class MovieController {
 	@RequestMapping(value = "/movies", method = RequestMethod.GET, produces = { "application/json" })
 	public ResponseEntity<List<Movie>> allMoviesHandler() {
 		List<Movie> movielist = movieservice.getAllMovies();
+		logger.debug("debug1");
+		logger.info("info1");
+		logger.warn("warn1");
+		logger.error("error1");
 		return new ResponseEntity<List<Movie>>(movielist, HttpStatus.OK);
 	}
 

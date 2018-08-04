@@ -1,14 +1,16 @@
 package com.stackroute.movieservice.domain;
 
+
+
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Builder
-@Document
+//@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

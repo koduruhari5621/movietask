@@ -1,5 +1,7 @@
 package com.stackroute.movieservice.configuration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
 import org.springframework.context.ApplicationListener;
@@ -33,7 +35,12 @@ public class BootStrapData implements ApplicationListener<ContextRefreshedEvent>
 				 .build();
 				 movieRepository.save(testMovie); 
 				   
-		
+		Logger logger = LoggerFactory.getLogger("BootStrapData");
+		logger.debug("debug");
+		logger.info("info");
+		logger.warn("warn");
+		logger.error("error1");
+
 		
 		
 
