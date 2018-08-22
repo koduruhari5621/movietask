@@ -2,71 +2,64 @@ package com.stackroute.movieservice.domain;
 
 
 
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
-//@Entity
+@Document
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Builder
 public class Movie {
 	@Id
 	private int movieId;
-	private String movieName;
-	private String movieDesc;
-	private int movieYear;
-
+	private String movieTitle;
+	private float movieRating;
+	private int releaseYear;
+	
+	
 //	public Movie() {
-//
+//		// TODO Auto-generated constructor stub
 //	}
-//
-//	public Movie(int movieId, String movieName, String movieDesc, int movieYear) {
-//		super();
+//	
+//	public Movie(int movieId, String movieTitle, int movieRating, int releaseYear) {
+//		
 //		this.movieId = movieId;
-//		this.movieName = movieName;
-//		this.movieDesc = movieDesc;
-//		this.movieYear = movieYear;
+//		this.movieTitle = movieTitle;
+//		this.movieRating = movieRating;
+//		this.releaseYear = releaseYear;
 //	}
-//
-//	// movie id
+//	
 //	public int getMovieId() {
 //		return movieId;
 //	}
-//
 //	public void setMovieId(int movieId) {
 //		this.movieId = movieId;
 //	}
-//
-//	// movie name
-//	public String getMovieName() {
-//		return movieName;
+//	public String getMovieTitle() {
+//		return movieTitle;
 //	}
-//
-//	public void setMovieName(String movieName) {
-//		this.movieName = movieName;
+//	public void setMovieTitle(String movieTitle) {
+//		this.movieTitle = movieTitle;
 //	}
-//
-//	// movie desc
-//	public String getMovieDesc() {
-//		return movieDesc;
+//	public float getMovieRating() {
+//		return movieRating;
 //	}
-//
-//	public void setMovieDesc(String movieDesc) {
-//		this.movieDesc = movieDesc;
+//	public void setMovieRating(int movieRating) {
+//		this.movieRating = movieRating;
 //	}
-//
-//	public int getMovieYear() {
-//		return movieYear;
+//	public int getReleaseYear() {
+//		return releaseYear;
 //	}
-//
-//	public void setMovieYear(int movieYear) {
-//		this.movieYear = movieYear;
+//	public void setReleaseYear(int releaseYear) {
+//		this.releaseYear = releaseYear;
 //	}
+
 
 }

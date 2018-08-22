@@ -1,102 +1,95 @@
 package com.stackroute.movieservice.services;
 
+import java.net.URI;
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.stackroute.movieservice.domain.Movie;
-import com.stackroute.movieservice.exceptions.MovieAlreadyExistsException;
+import com.stackroute.movieservice.exceptions.MovieAlreadyExists;
 import com.stackroute.movieservice.exceptions.MovieNotFoundException;
 import com.stackroute.movieservice.repository.MovieRepository;
 
-@Service
+@Service("movieimpl1")
 public class MovieServiceImpl implements MovieService {
 
-	 MovieRepository movierepo;
-
-//	public MovieServiceImpl() {
-//
-//	}
-
+	MovieRepository movieRepository;
+	
 	@Autowired
-	public MovieServiceImpl(MovieRepository movierepo) {
-		this.movierepo = movierepo;
-
-	}
-
-	// ----------------savemovie-------------------------
-	@Override
-	public Movie saveMovie(Movie movie) throws MovieAlreadyExistsException {
-		Movie obj = null;
-		int local = movie.getMovieId();
-		if (movierepo.existsById(local) != true) {
-			obj = movierepo.save(movie);
-			return obj;
-		} else {
-			throw new MovieAlreadyExistsException("Movie already exits ");
+	public MovieServiceImpl(MovieRepository movieRepository) {
+			
+		this.movieRepository=movieRepository;
 		}
-
-	}
-
-	// ---------------------getall-------------------------
-
 	@Override
-
-	public List<Movie> getAllMovies() {
+	public Movie saveMovies(Movie movie) throws MovieAlreadyExists{
+		
 		// TODO Auto-generated method stub
-		List<Movie> movielist = (List<Movie>) movierepo.findAll();
-		return movielist;
-	}
-
-	// ------------------------------------------delete------------------------
-	@Override
-	public List<Movie> deleteMovie(Movie movie) throws MovieNotFoundException {
-		int local = movie.getMovieId();
-		List<Movie> listobj;
-		if (movierepo.existsById(local) == true) {
-			movierepo.deleteById(local);
-			listobj = (List<Movie>) movierepo.findAll();
-		} else {
-			throw new MovieNotFoundException("Movie not found");
+		/*1.save in cloud
+		2.save to db
+		3.send to mail service*/
+		if(!movieRepository.existsById(movie.getMovieId())){
+			Movie movieSaved=movieRepository.save(movie);
+			return movieSaved ;
 		}
-		return listobj;
+		
+		else throw new MovieAlreadyExists("movie already exists");	
+		
+		
 	}
+	
+	
 
-	// --------------update movie---------------------------------
+		
 	@Override
-	public Movie updateMovie(Movie movie) throws MovieNotFoundException {
-		Movie obj = null;
-		int local = movie.getMovieId();
-		if (movierepo.existsById(local) == true) {
-			Optional<Movie> movielocal = movierepo.findById(local); // setMovieName(movie.getMovieName());
-			obj = movielocal.get();
-			obj.setMovieName(movie.getMovieName());
-			return obj;
-		} else {
-			throw new MovieNotFoundException("Notfound");
-		}
+	public List<Movie> getAllMovies() {
+	List<Movie> getAllMovies=(List<Movie>) movieRepository.findAll();
+		return getAllMovies;
 	}
 
-	// @Override
-	// public List<Movie> getByMovieAlpha(String searchTerm) {
-	// List<Movie> alphalist = movierepo.getByMovieAlpha(searchTerm);
-	// return alphalist;
-	// }
+	@Override
+	public Movie getMovieById(int movieId) throws MovieNotFoundException  {
+		
+		Optional<Movie> findMovie=movieRepository.findById(movieId);
+		if(!findMovie.isPresent())
+		{
+			throw new MovieNotFoundException("movie not found");
+			
+		}
+		return findMovie.get();
+	}
+	@Override
+     public Movie deleteMovies(int movieId) {
+		
+    	 Optional<Movie> findMovie=movieRepository.findById(movieId);
+    	 movieRepository.deleteById(movieId);
+		return findMovie.get();
+	}
 
-	// ----------------get-byId-----------------------------------------
+	@Override
+	public Movie updateMovie(Movie movie) {
+		
+Movie movieUpdated=movieRepository.save(movie);
+
+	
+			return  movieUpdated;
+	}
+//	@Override
+//	public List<Movie> getByMovieAlpha(String searchTerm) {
+//	List<Movie> list=movieRepository.getByMovieAlpha(searchTerm);
+//		return list;
+//	}
+	@Override
+	public List<Movie> getByTitle(String movieTitle) {
+		
+		List<Movie> list=movieRepository.getByMovieTitle(movieTitle);
+		return list;
+	}
+	
+	
+	
 
 }
-// ------------junk---------------------------
-// @Override
-// public List<Movie> deleteMovie(MovieId movieid) {
-// List<Movie> listobj ;
-// int local = movieid;
-// if(movierepo.existsById(movieid)==true) {
-// movierepo.deleteById(movieid);
-// listobj = (List<Movie>) movierepo.findAll();
-// }else {
-// listobj = (List<Movie>) movierepo.findAll();
-// }
-// return listobj;
